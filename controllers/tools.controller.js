@@ -1,11 +1,6 @@
-let tools = [
-    {id: 1, name: 'hammer1'},
-    {id: 2, name: 'hammer2'},
-    {id: 3, name: 'hammer3'},
-    {id: 4, name: 'hammer4'}
-]
 
-module.exports.getAllTools = (req, res, next) => {
+
+module.exports.getAllUsers = (req, res, next) => {
     
     const {limit, page} = req.query;
 
@@ -16,7 +11,7 @@ module.exports.getAllTools = (req, res, next) => {
 }
 
 
-module.exports.saveATool = (req, res) => {
+module.exports.saveAUser = (req, res) => {
     
     tools.push(req.body);
     console.log(req.query);
@@ -24,21 +19,21 @@ module.exports.saveATool = (req, res) => {
 
 }
 
-module.exports.getToolDetail = (req, res) => {
+module.exports.getUserDetail = (req, res) => {
     
-    const {id} = req.params;
+    const {name} = req.params;
 
-    console.log(id);
+    console.log(name);
 
     // const filter = {id: id};
 
-    const foundTool = tools.find(tool => tool.id == id);
+    const foundTool = tools.find(tool => tool.name == name);
 
     res.send(foundTool);
     
 }
 
-module.exports.updateTool = (req, res) => {
+module.exports.updateUser = (req, res) => {
     
     // const newData = req.body;
 
@@ -60,7 +55,7 @@ module.exports.updateTool = (req, res) => {
 
 }
 
-module.exports.deleteTool = (req, res, next) => {
+module.exports.deleteUser = (req, res, next) => {
  
     const {id} = req.params;
 
