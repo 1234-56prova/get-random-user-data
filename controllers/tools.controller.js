@@ -1,6 +1,7 @@
+const { getDb } = require("../utlis/dbConnect");
 
 
-module.exports.getAllUsers = (req, res, next) => {
+module.exports.getAllTools = (req, res, next) => {
     
     const {limit, page} = req.query;
 
@@ -11,15 +12,30 @@ module.exports.getAllUsers = (req, res, next) => {
 }
 
 
-module.exports.saveAUser = (req, res) => {
+module.exports.saveATool = async (req, res, next) => {
     
-    tools.push(req.body);
-    console.log(req.query);
-    res.send('tools found');
+    try {
+    
+    const db = getDb();
 
+    const tools = req.body; 
+
+    const result = await db.collection("tools").insertOne(tools);
+
+    console.log(result);
+    
+    res.send("successful");
+        
+}
+    
+    catch(error) {
+        
+        next(error);
+
+    }
 }
 
-module.exports.getUserDetail = (req, res) => {
+module.exports.getToolDetail = (req, res) => {
     
     const {name} = req.params;
 
@@ -33,7 +49,7 @@ module.exports.getUserDetail = (req, res) => {
     
 }
 
-module.exports.updateUser = (req, res) => {
+module.exports.updateTool = (req, res) => {
     
     // const newData = req.body;
 
@@ -55,7 +71,7 @@ module.exports.updateUser = (req, res) => {
 
 }
 
-module.exports.deleteUser = (req, res, next) => {
+module.exports.deleteTool = (req, res, next) => {
  
     const {id} = req.params;
 
